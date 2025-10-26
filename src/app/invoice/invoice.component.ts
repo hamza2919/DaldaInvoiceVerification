@@ -29,7 +29,7 @@ export class InvoiceComponent {
     }
 
     // 🔹 Change URL to show fake domain
-    this.updateBrowserUrl();
+    //this.updateBrowserUrl();
   }
 
   updateBrowserUrl(): void {

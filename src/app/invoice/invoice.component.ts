@@ -28,20 +28,18 @@ export class InvoiceComponent {
       this.decodedData = this.getDefaultInvoice();
     }
 
-    // 🔹 UPDATE URL in address bar without redirecting
+    // 🔹 Change URL to show fake domain
     this.updateBrowserUrl();
   }
 
   updateBrowserUrl(): void {
-    // Use Angular Router to update URL without navigation
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {}, // Clear query params if needed
-      replaceUrl: true // Replace current history entry
+    // Change the URL path to show the fake domain
+    const newUrl = '/dalda.salesflo.com/OB/qrcode';
+    
+    this.router.navigateByUrl(newUrl, { 
+      replaceUrl: true,
+      skipLocationChange: false 
     });
-
-    // Update the browser URL without reloading
-    window.history.replaceState({}, '', 'https://dalda.salesflo.com/');
   }
 
   decodeBase64Json(encoded: string): any {

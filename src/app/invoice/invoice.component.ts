@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice',
@@ -13,7 +13,7 @@ export class InvoiceComponent {
 
   decodedData: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     // Read from query parameter (?data=)
@@ -27,12 +27,39 @@ export class InvoiceComponent {
     } else {
       this.decodedData = this.getDefaultInvoice();
     }
+
+    // 🔹 UPDATE URL in address bar without redirecting
+    this.updateBrowserUrl();
+  }
+
+  updateBrowserUrl(): void {
+    // Use Angular Router to update URL without navigation
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {}, // Clear query params if needed
+      replaceUrl: true // Replace current history entry
+    });
+
+    // Update the browser URL without reloading
+    window.history.replaceState({}, '', 'https://dalda.salesflo.com/');
   }
 
   decodeBase64Json(encoded: string): any {
     try {
+      // URL-safe Base64 decoding
+      let base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+      
+      // Add padding if necessary
+      const pad = base64.length % 4;
+      if (pad) {
+        if (pad === 1) {
+          throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+        }
+        base64 += new Array(5 - pad).join('=');
+      }
+      
       // Decode Base64
-      const decodedString = atob(encoded);
+      const decodedString = atob(base64);
       // Parse JSON
       return JSON.parse(decodedString);
     } catch (err) {

@@ -1,0 +1,59 @@
+<body>
+  
+<div class="invoice-main"
+  style="max-width: 400px;background-color: #f1f7ff;padding: 30px;margin: 0 auto;font-family: arial;">
+  <div class="invoice-container"
+    style="background-color: #fff;padding: 15px 25px;border-radius: 12px;box-shadow: 0 4px 5px rgb(221 226 235), 0 1px 10px rgb(221 226 235), 0 2px 4px -1px rgb(221 226 235);">
+    <div class="invoice-header" style="text-align: center;overflow: hidden;">
+      <img class="company-logo" alt="Company Logo"
+        src="https://d1c812jkb9db1x.cloudfront.net/dalda/logo.png?v=1706610143"
+        style="max-width: 150px;display: inline-block;margin: 20px 0;">
+
+      <div class="invoice-content"
+        style="overflow: hidden;background-color: #f1f4ff;padding: 15px 20px;border-radius: 12px;">
+        <div *ngIf="decodedData">
+          <div class="invoice-item" style="width: 100%;float: left;border-bottom: 1px solid #dfe3f3;padding: 8px 0;">
+            <div style="float: left;width: 50%;text-align: left;font-size: 14px;">Invoice Number:</div>
+            <div style="float: right;width: 50%;text-align: right;font-weight: bold;font-size: 14px;">{{
+              decodedData.invoiceNumber }}</div>
+          </div>
+
+          <div class="invoice-item" style="width: 100%;float: left;border-bottom: 1px solid #dfe3f3;padding: 8px 0;">
+            <div style="float: left;width: 50%;text-align: left;font-size: 14px;">Invoice Date:</div>
+            <div style="float: right;width: 50%;text-align: right;font-weight: bold; font-size: 14px;">
+              {{ decodedData.invoiceDate | date:'dd MMMM yyyy' }}
+            </div>
+          </div>
+
+
+          <div class="invoice-item" style="width: 100%;float: left;border-bottom: 1px solid #dfe3f3;padding: 8px 0;">
+            <div style="float: left;width: 50%;text-align: left;font-size: 14px;">Distributor Name:</div>
+            <div style="float: right;width: 50%;text-align: right;font-weight: bold;font-size: 14px;">
+              {{ decodedData.distributorName }} - <a href="#">[{{ decodedData.distributorPhone }}]</a>
+            </div>
+          </div>
+
+          <div class="invoice-item" style="width: 100%;float: left;border-bottom: 1px solid #dfe3f3;padding: 8px 0;">
+            <div style="float: left;width: 50%;text-align: left;font-size: 14px;">Customer Name:</div>
+            <div style="float: right;width: 50%;text-align: right;font-weight: bold;font-size: 14px;">{{
+              decodedData.customerName }} - {{decodedData.customerCode}}</div>
+          </div>
+
+           <div class="invoice-item" style="width: 100%;float: left;border-bottom: 1px solid #dfe3f3;padding: 8px 0;">
+            <div style="float: left;width: 50%;text-align: left;font-size: 14px;">Total Invoice Amount:</div>
+            <div style="float: right;width: 50%;text-align: right;font-weight: bold;font-size: 14px;">{{ decodedData.totalAmount }}</div>
+          </div>
+ 
+        </div>
+      </div>
+
+      <div class="invoice-item" style="width: 100%;float: left; margin: 0;">
+        <h3
+          style="text-transform: uppercase;font-weight: 700;margin: 45px 0 25px;text-align: center;font-size: 30px;color: #04834E;">
+          ORIGINAL</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
